@@ -39,9 +39,9 @@ if __name__ == '__main__':
             rx_size = 0
 
             rx_struct['led-state'] = link.rx_obj(obj_type='?', start_pos=rx_size)
-            rx_size = txfer.STRUCT_FORMAT_LENGTHS['?']
+            rx_size += txfer.STRUCT_FORMAT_LENGTHS['?']
             rx_struct['some-num'] = link.rx_obj(obj_type='B', start_pos=rx_size)
-            rx_size = txfer.STRUCT_FORMAT_LENGTHS['B']
+            rx_size += txfer.STRUCT_FORMAT_LENGTHS['B']
 
             print(f"Sent: {ledstate} and 12345.")
             print(f"Got a reply: {rx_struct}")
