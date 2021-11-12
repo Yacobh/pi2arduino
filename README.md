@@ -13,7 +13,7 @@ import json
 if __name__ == '__main__':
     try:
         print("iniciamos")
-        link = txfer.SerialTransfer('/dev/ttyACM0')
+        link = txfer.SerialTransfer('/dev/ttyUSB0')
         
         link.open()
         time.sleep(2) # allow some time for the Arduino to completely reset
