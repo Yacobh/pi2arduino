@@ -12,6 +12,7 @@ import json
 
 if __name__ == '__main__':
     try:
+        print("iniciamos")
         link = txfer.SerialTransfer('/dev/ttyACM0')
         
         link.open()
@@ -20,7 +21,8 @@ if __name__ == '__main__':
         changetime = time.time()
         senddict = {"ledstate":ledstate}
         while True:
-            #check every once in a while to see if it's time to change ledstate
+            #check every once in a while to see if it's time to change ledstate     
+            print("tratamos de conectar")
             if (time.time() - changetime) > .5:
                 ledstate = not ledstate
                 changetime = time.time()
