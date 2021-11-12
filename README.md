@@ -22,8 +22,7 @@ if __name__ == '__main__':
         senddict = {"ledstate":ledstate}
         while True:
             #check every once in a while to see if it's time to change ledstate     
-            print("tratamos de conectar")
-            if (time.time() - changetime) > .5:
+            if (time.time() - changetime) > 1:
                 ledstate = not ledstate
                 changetime = time.time()
 
@@ -52,8 +51,8 @@ if __name__ == '__main__':
             rx_struct['some-num'] = link.rx_obj(obj_type='B', start_pos=rx_size)
             rx_size = txfer.STRUCT_FORMAT_LENGTHS['B']
 
-            print(f"Sent: {ledstate} and 12345.")
-            print(f"Got a reply: {rx_struct}")
+            print(f"ENVIADO DESDE RASPBERRY: {ledstate} and 234.")
+            print(f"RECIBIDO DESDE ARDUINO: {rx_struct}")
   
     except KeyboardInterrupt:
         try:
@@ -90,6 +89,7 @@ void setup()
   Serial.begin(115200);
   myTransfer.begin(Serial);
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(A1, OUTPUT);
 }
 
 void loop()
@@ -97,8 +97,9 @@ void loop()
   if(myTransfer.available())
   {
     myTransfer.rxObj(workingstruct);
+    workingstruct.some_number = 0;
     myTransfer.sendDatum(workingstruct);
   }
-  digitalWrite(LED_BUILTIN, workingstruct.led_state);
+  digitalWrite(A1, workingstruct.led_state);
 }
 ```
